@@ -1,4 +1,4 @@
-package com.example.gestionreclamation;
+package com.gestion.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
