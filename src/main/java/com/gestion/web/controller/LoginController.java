@@ -1,5 +1,6 @@
 package com.gestion.web.controller;
 
+import com.gestion.web.model.Privilege;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,11 +17,17 @@ import com.gestion.web.model.Role;
 import com.gestion.web.service.LoginService;
 import com.gestion.web.service.RoleService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class LoginController {
 	
 	@Autowired
 	LoginService loginService;
+
+	@Autowired
+	RoleService roleService;
 
 	
 	//affichage de la page login.jsp
@@ -36,29 +43,26 @@ public class LoginController {
 	public String showLogin() {
 		return "login"; //il va appeler la page login.jsp !
 	}
-	/*@PostMapping(value="/login")
-	public String verifierLogin(ModelMap model, @RequestParam String login,
-			                        @RequestParam String mp ) {
-		System.out.println("Login:"+login+"; mp : "+mp);
-		if (login.equals(mp)) {
-			//charger des variables dans le model pour utilisation 
-			//par la jsp welcome
-			model.put("identifiant", login);
-			return "welcome";
-		}else {
-			model.put("erreur","Votre login ne correspond pas !!!");
-			return "login";
-		}
-	}*/
+
 	@PostMapping(value="/login")
 	public ModelAndView verifierLogin(@RequestParam String login,
 			                        @RequestParam String mp ) {
 		ModelAndView model = new ModelAndView();
 		if (loginService.verifierAuthentif(login, mp)) {
-			//charger des variables dans le model pour utilisation 
-			//par la jsp welcome
 			model.addObject("identifiant",login);
-			model.setViewName("welcome");
+			ArrayList<Privilege> lp = new ArrayList<>();
+			boolean flag = false;
+			for (Privilege p :this.loginService.getCompte(login).getRole().getPrivileges()){
+				lp.add(p);
+				if(p.getIntitule()=="manager")flag = true;
+			}
+			model.addObject("privileges",lp);
+			if(flag){
+				model.setViewName("welcomeAdmin");
+			}else{
+				model.setViewName("welcomeUser");
+			}
+
 			return model;
 		}else {
 			model.addObject("erreur","Votre login ne correspond pas !!!");
@@ -74,8 +78,9 @@ public class LoginController {
 		c.setLogin(login);
 		c.setMp(mp);
 		loginService.creerCompte(c);
-		
-		mv.setViewName("welcome");
+		Role r = new Role();r.setIntitule("user");
+		roleService.affecteCompteARole(c, r);
+		mv.setViewName("welcomeUser");
 		return mv;
 	}
 	@GetMapping(value="/addCompte")

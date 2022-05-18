@@ -30,7 +30,7 @@ public class PrivilegeController {
 		privilegeService.affecterPriviegesRole(p, r);
 		System.out.println(privilegeService.getPrivileges());
 		mv.addObject("privileges", privilegeService.getPrivileges());
-		mv.setViewName("welcome");
+		mv.setViewName("home");
 		return mv;
 	}
 
