@@ -27,7 +27,8 @@ public class LoginController {
 	LoginService loginService;
 
 	@Autowired
-	RoleService roleService;
+	RoleService roleService ;
+	Role role;
 
 	
 	//affichage de la page login.jsp
@@ -50,6 +51,8 @@ public class LoginController {
 		ModelAndView model = new ModelAndView();
 		if (loginService.verifierAuthentif(login, mp)) {
 			model.addObject("identifiant",login);
+			role = loginService.getCompte(login).getRole() ;
+			model.addObject("role", this.role.getIntitule());
 			ArrayList<Privilege> lp = new ArrayList<>();
 			boolean flag = false;
 			for (Privilege p :this.loginService.getCompte(login).getRole().getPrivileges()){
