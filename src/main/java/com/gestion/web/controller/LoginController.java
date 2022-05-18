@@ -54,7 +54,7 @@ public class LoginController {
 			boolean flag = false;
 			for (Privilege p :this.loginService.getCompte(login).getRole().getPrivileges()){
 				lp.add(p);
-				if(p.getIntitule()=="manager")flag = true;
+				if(p.getIntitule().equals("manager"))flag = true;
 			}
 			model.addObject("privileges",lp);
 			if(flag){
