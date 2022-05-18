@@ -16,10 +16,13 @@ public class LoginService {
 	//partie contenant le métiers de l'application/
 	//Business Logic
 	public boolean verifierAuthentif(String login, String motPasse) {
-		if (login.equals(motPasse))
-			return true;
-		else
-			return false;
+		List<Compte> comptes = getComptes(motPasse);
+		for(Compte c :comptes){
+			if(motPasse.equals(c.getMp())){
+				return true;
+			}
+		}
+		return false;
 	}
 	public void creerCompte(Compte c) {
 		compteRepository.save(c);

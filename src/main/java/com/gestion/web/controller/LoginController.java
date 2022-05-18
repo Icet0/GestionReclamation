@@ -24,7 +24,14 @@ public class LoginController {
 
 	
 	//affichage de la page login.jsp
-	//@RequestMapping(value = "/login",method = RequestMethod.GET)
+	@GetMapping(value = "/")
+	public String home(){
+		return "home";
+	}
+
+
+
+
 	@GetMapping(value = "/login")
 	public String showLogin() {
 		return "login"; //il va appeler la page login.jsp !
@@ -76,7 +83,7 @@ public class LoginController {
 		return "inscription";
 	}
 	@GetMapping(value="/listeComptes")
-	public ModelAndView showComptes() {
+	public ModelAndView showCobmptes() {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("Comptes", loginService.getComptes());
 		mv.setViewName("lesComptes");
