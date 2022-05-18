@@ -5,16 +5,14 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>User dashboard</title>
 </head>
 <body>
 Bienvenue ${identifiant}
+<br />
+Liste des privileges : <br/>
 <c:forEach var="row" items="${privileges}">
 Intitule Privilege : ${row.intitule}<br />
-Liste des Roles :
-	<c:forEach var="rowRole" items="${row.roles}">
-	Intitule Role : ${rowRole}
-	</c:forEach>
 </c:forEach>
 </body>
 </html>
