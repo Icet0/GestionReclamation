@@ -12,9 +12,8 @@ Bienvenue ${identifiant}
 <br />
 Vôtre rôle : ${role}
 <br />
-Liste des privileges : <br/>
-<c:forEach var="row" items="${privileges}">
-Intitule Privilege : ${row.intitule}<br />
+Liste des privileges :
+<c:forEach var="row" items="${privileges}"> ${row.intitule}<br />
 </c:forEach>
 </body>
 </html>

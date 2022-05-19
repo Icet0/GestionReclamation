@@ -15,6 +15,8 @@ Vôtre rôle : ${role}
 Liste des privileges : <br/>
 <c:forEach var="row" items="${privileges}">
 Intitule Privilege : ${row.intitule}<br />
-</c:forEach>
+</c:forEach> <br />
+
+<button type="button"><a href="/roleattrib"> Attribuer un rôle à un compte </a></button>
 </body>
 </html>
