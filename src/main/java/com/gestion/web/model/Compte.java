@@ -1,10 +1,7 @@
 package com.gestion.web.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.List;
 
 
 @Entity //classe persistante liée à une table dans la base de données !
@@ -16,7 +13,14 @@ public class Compte {
 	
 	@ManyToOne
 	Role role;
-	
+	@OneToMany
+	@JoinColumn(name = "reclamation_message")
+	private List<Reclamation> reclamations;
+
+	public List<Reclamation>  getReclamation() {
+		return reclamations;
+	}
+
 	public Compte() {
 		super();
 	}
