@@ -27,7 +27,8 @@ public class LoginController {
 	LoginService loginService;
 
 	@Autowired
-	RoleService roleService;
+	RoleService roleService ;
+	Role role;
 
 	
 	//affichage de la page login.jsp
@@ -50,11 +51,13 @@ public class LoginController {
 		ModelAndView model = new ModelAndView();
 		if (loginService.verifierAuthentif(login, mp)) {
 			model.addObject("identifiant",login);
+			role = loginService.getCompte(login).getRole() ;
+			model.addObject("role", this.role.getIntitule());
 			ArrayList<Privilege> lp = new ArrayList<>();
 			boolean flag = false;
 			for (Privilege p :this.loginService.getCompte(login).getRole().getPrivileges()){
 				lp.add(p);
-				if(p.getIntitule().equals("manager"))flag = true;
+				if(p.getIntitule().equals("Administration"))flag = true;
 			}
 			model.addObject("privileges",lp);
 			if(flag){
@@ -105,7 +108,28 @@ public class LoginController {
 		return mv;
 	}
 
-	
-	
-	
+
+	@GetMapping(value = "/roleattrib")
+	public String showRole() {
+		return "roleattrib"; //il va appeler la page login.jsp !
+	}
+	@PostMapping(value="/roleattrib")
+	public ModelAndView attribRole(Role r, String login, String mp){
+		ModelAndView m = new ModelAndView() ;
+		if (loginService.verifierAuthentif(login, mp)) {
+			m.addObject("log", login);
+
+			roleService.affecteCompteARole(loginService.getCompte(login), r) ;
+			m.addObject("Role", loginService.getCompte(login).getRole().getIntitule()) ;
+			System.out.println(loginService.getCompte(login).getRole());
+			m.setViewName("compterole2");
+			return m;
+		}
+		else{
+			m.addObject("erreur","Le compte que vous cherchez n'existe pas");
+			m.setViewName("compterole2");
+			return m;
+		}
+	}
+
 }
