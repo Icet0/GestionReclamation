@@ -55,10 +55,8 @@ public class Compte {
 
 	@Override
 	public String toString() {
-		return "Compte [login=" + login + ", mp=" + mp;
+		return "[login=" + login + ", mp=" + mp + "]" ;
 	}
-
-	
 	
 	
 }

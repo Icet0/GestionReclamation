@@ -34,9 +34,4 @@ public class PrivilegeController {
 		return mv;
 	}
 
-
-
-
-
-
 }

@@ -16,13 +16,13 @@ Nombre : ${row[1]}<br />
 
 
 La liste des comptes : <br />
-${Comptes}
+<c:forEach var="cpt" items="${ListCompte}">
+    -> ${cpt} <br />
+</c:forEach>
 
-<b>Le compte est : </b> ${abc}
+<b>Le compte est : </b> ${compte1}
 <br />
-Les comptes dont le mot de passe est ${mp} sont <br />
-${lescomptes}
-
+Les comptes dont le mot de passe est ${mp} sont : <br />
 <br />
 Le compte ${compte1} est affecté au rôle ${role1}
 <br />
