@@ -16,7 +16,6 @@ public class Compte {
 
 
 	@OneToMany
-	@JoinColumn(name = "reclamation_message")
 	private List<Reclamation> reclamations;
 
 
