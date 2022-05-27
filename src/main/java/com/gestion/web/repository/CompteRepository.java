@@ -21,4 +21,5 @@ public interface CompteRepository extends JpaRepository<Compte, String>{
 	//Réecriture en JPQL Java Persistence Query Language.
 	@Query("select c from Compte c")
 	public List<Compte> getTousLesComptes();
+
 }
