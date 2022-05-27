@@ -65,7 +65,7 @@ public class LoginController {
 
 			return model;
 		}else {
-			model.addObject("erreur","Votre login ne correspond pas !!!");
+			model.addObject("erreur","Mot de passse passe incorrect");
 			model.setViewName("login");
 			return model;
 		}

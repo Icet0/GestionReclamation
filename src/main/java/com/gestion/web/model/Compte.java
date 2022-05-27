@@ -14,9 +14,12 @@ public class Compte {
 	@ManyToOne
 	Role role;
 
+
 	@OneToMany
-	List<Reclamation> reclamations;
-	
+	@JoinColumn(name = "reclamation_message")
+	private List<Reclamation> reclamations;
+
+
 	public Compte() {
 		super();
 	}
