@@ -8,11 +8,13 @@ public class Reclamation {
     @Id
     @Column(length = 60)
     private String message;
-    private String tire;
+    private String titre;
     private Date date;
 
     @ManyToOne
     private Compte compte;
+
+    private boolean valide;
 
 
     public Reclamation(){super();}
@@ -25,12 +27,12 @@ public class Reclamation {
         this.message = message;
     }
 
-    public String getTire() {
-        return tire;
+    public String getTitre() {
+        return titre;
     }
 
-    public void setTire(String tire) {
-        this.tire = tire;
+    public void setTitre(String tire) {
+        this.titre = tire;
     }
 
     public Date getDate() {
@@ -49,13 +51,24 @@ public class Reclamation {
         this.compte = compte;
     }
 
+    public boolean isValide() {
+        return valide;
+    }
+
+    public void setValide(boolean valide) {
+        this.valide = valide;
+    }
+
+
+
     @Override
     public String toString() {
         return "Reclamation{" +
                 "message='" + message + '\'' +
-                ", tire='" + tire + '\'' +
+                ", tire='" + titre + '\'' +
                 ", date=" + date +
                 ", compte=" + compte +
+                ", valide=" + valide +
                 '}';
     }
 }
