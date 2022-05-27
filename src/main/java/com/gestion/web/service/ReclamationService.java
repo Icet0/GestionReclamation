@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.Id;
+import java.util.List;
 
 @Service
 
@@ -18,6 +19,10 @@ public class ReclamationService {
 
     public void creerReclamation(Reclamation r){
         this.reclamationRepository.save(r);
+    }
+
+    public List<Reclamation> getReclamations(){
+        return this.reclamationRepository.findAll();
     }
 
     public void validerReclamation(String id){

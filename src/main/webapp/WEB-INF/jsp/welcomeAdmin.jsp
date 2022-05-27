@@ -14,5 +14,7 @@ Liste des privileges : <br/>
 <c:forEach var="row" items="${privileges}">
 Intitule Privilege : ${row.intitule}<br />
 </c:forEach>
+
+<button><a href="/reclamationsAdmin">Voir toutes les réclamations</a></button>
 </body>
 </html>
