@@ -1,6 +1,7 @@
 package com.gestion.web.controller;
 
 import com.gestion.web.model.Privilege;
+import com.gestion.web.service.ReclamationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,6 +29,9 @@ public class LoginController {
 
 	@Autowired
 	RoleService roleService;
+
+	@Autowired
+	ReclamationService reclamationService;
 
 	
 	//affichage de la page login.jsp
@@ -58,6 +62,7 @@ public class LoginController {
 			}
 			model.addObject("privileges",lp);
 			if(flag){
+
 				model.setViewName("welcomeAdmin");
 			}else{
 				model.setViewName("welcomeUser");
