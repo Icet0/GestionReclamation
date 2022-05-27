@@ -10,13 +10,16 @@
 <body>
 Bienvenue ${identifiant}
 <br />
-VÙtre rÙle : ${role}
+V√¥tre r√¥le : ${role}
 <br />
 Liste des privileges : <br/>
 <c:forEach var="row" items="${privileges}">
 Intitule Privilege : ${row.intitule}<br />
+</c:forEach>
+
+<button><a href="/reclamationsAdmin">Voir toutes les r√©clamations</a></button>
 </c:forEach> <br />
 
-<button type="button"><a href="/roleattrib"> Attribuer un rÙle ‡ un compte </a></button>
+<button type="button"><a href="/roleattrib"> Attribuer un r√¥le √† un compte </a></button>
 </body>
 </html>

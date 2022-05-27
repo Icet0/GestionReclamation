@@ -6,6 +6,8 @@ import java.util.Date;
 @Entity //classe persistante liée à une table dans la base de données !
 public class Reclamation {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
     @Column(length = 60)
     private String message;
     private String titre;
@@ -18,6 +20,14 @@ public class Reclamation {
 
 
     public Reclamation(){super();}
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getMessage() {
         return message;
@@ -65,7 +75,7 @@ public class Reclamation {
     public String toString() {
         return "Reclamation{" +
                 "message='" + message + '\'' +
-                ", tire='" + titre + '\'' +
+                ", titre='" + titre + '\'' +
                 ", date=" + date +
                 ", compte=" + compte +
                 ", valide=" + valide +

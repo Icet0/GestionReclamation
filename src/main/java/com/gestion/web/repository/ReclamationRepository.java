@@ -16,7 +16,7 @@ public interface ReclamationRepository extends JpaRepository<Reclamation, String
     public Reclamation getReclamationByMessage(String message);
     public Reclamation getReclamationByTitre(String titre);
     public Reclamation getReclamationByDate(Date date);
-
+    public List<Reclamation> findAll();
     public Reclamation getReclamationByValide(boolean valide);
 
 }
