@@ -30,4 +30,7 @@ public class ReclamationService {
         r.setValide(!r.isValide());
         this.reclamationRepository.save(r);
     }
+    public List<Reclamation> getReclamationCompte(String login){
+        return reclamationRepository.findByCompte_Login(login);
+    }
 }

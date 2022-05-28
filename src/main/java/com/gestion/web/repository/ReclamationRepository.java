@@ -11,12 +11,15 @@ import java.util.List;
 
 @Repository
 public interface ReclamationRepository extends JpaRepository<Reclamation, String> {
+    List<Reclamation> findByCompte_Login(String login);
 
     public Reclamation getReclamationByCompte(Compte compte);
     public Reclamation getReclamationByMessage(String message);
     public Reclamation getReclamationByTitre(String titre);
     public Reclamation getReclamationByDate(Date date);
-    public List<Reclamation> findAll();
+
     public Reclamation getReclamationByValide(boolean valide);
 
+    @Override
+    List<Reclamation> findAll();
 }

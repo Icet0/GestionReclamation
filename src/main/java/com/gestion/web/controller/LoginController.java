@@ -1,6 +1,7 @@
 package com.gestion.web.controller;
 
 import com.gestion.web.model.Privilege;
+import com.gestion.web.model.Reclamation;
 import com.gestion.web.service.ReclamationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -76,6 +77,8 @@ public class LoginController {
 
 				model.setViewName("welcomeAdmin");
 			}else{
+				List<Reclamation> recla = reclamationService.getReclamationCompte(login);
+				model.addObject("reclamation", recla);
 				setLoginCookie(response,login);
 				setRoleCookie(response,"user");
 				Cookie name = WebUtils.getCookie(request, "login");
