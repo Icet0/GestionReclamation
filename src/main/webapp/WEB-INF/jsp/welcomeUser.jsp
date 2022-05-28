@@ -10,8 +10,6 @@
 <body>
 Bienvenue ${identifiant}
 <br />
-Votre êtes un ${role}
-<br/>
 <a  href="/reclamationsUser"
         type="button">
     Nouvelle réclamation

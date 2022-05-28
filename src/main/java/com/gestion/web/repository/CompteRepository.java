@@ -2,6 +2,7 @@ package com.gestion.web.repository;
 
 import java.util.List;
 
+import com.gestion.web.model.Reclamation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -22,5 +23,7 @@ public interface CompteRepository extends JpaRepository<Compte, String>{
 	//Réecriture en JPQL Java Persistence Query Language.
 	@Query("select c from Compte c")
 	public List<Compte> getTousLesComptes();
+
+
 
 }

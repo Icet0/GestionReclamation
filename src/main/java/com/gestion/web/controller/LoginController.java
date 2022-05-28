@@ -1,6 +1,7 @@
 package com.gestion.web.controller;
 
 import com.gestion.web.model.Privilege;
+import com.gestion.web.service.ReclamationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -27,7 +28,11 @@ public class LoginController {
 	LoginService loginService;
 
 	@Autowired
-	RoleService roleService;
+	RoleService roleService ;
+	Role role;
+
+	@Autowired
+	ReclamationService reclamationService;
 
 	
 	//affichage de la page login.jsp
@@ -58,7 +63,8 @@ public class LoginController {
 		ModelAndView model = new ModelAndView();
 		if (loginService.verifierAuthentif(login, mp)) {
 			model.addObject("identifiant",login);
-			model.addObject("role", this.loginService.getCompte(login).getRole().getIntitule()) ;
+			role = loginService.getCompte(login).getRole() ;
+			model.addObject("role", this.role.getIntitule());
 			ArrayList<Privilege> lp = new ArrayList<>();
 			boolean flag = false;
 			for (Privilege p :this.loginService.getCompte(login).getRole().getPrivileges()){
@@ -67,6 +73,7 @@ public class LoginController {
 			}
 			model.addObject("privileges",lp);
 			if(flag){
+
 				model.setViewName("welcomeAdmin");
 			}else{
 				setLoginCookie(response,login);
