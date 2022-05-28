@@ -1,6 +1,7 @@
 package com.gestion.web.controller;
 
 import com.gestion.web.model.Privilege;
+import com.gestion.web.model.Reclamation;
 import com.gestion.web.service.ReclamationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,7 +35,7 @@ public class LoginController {
 	@Autowired
 	ReclamationService reclamationService;
 
-	
+
 	//affichage de la page login.jsp
 	@GetMapping(value = "/")
 	public String home(){
@@ -58,7 +59,7 @@ public class LoginController {
 	}
 	@PostMapping(value="/login")
 	public ModelAndView verifierLogin(@RequestParam String login,
-			                        @RequestParam String mp,
+									  @RequestParam String mp,
 									  HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
 		if (loginService.verifierAuthentif(login, mp)) {
@@ -76,6 +77,8 @@ public class LoginController {
 
 				model.setViewName("welcomeAdmin");
 			}else{
+				List<Reclamation> recla = reclamationService.getReclamationCompte(login);
+				model.addObject("reclamation", recla);
 				setLoginCookie(response,login);
 				setRoleCookie(response,"user");
 				Cookie name = WebUtils.getCookie(request, "login");
@@ -94,7 +97,7 @@ public class LoginController {
 	}
 	@PostMapping(value="/addCompte")
 	public ModelAndView addCompte(@RequestParam String login,
-			                @RequestParam String mp) {
+								  @RequestParam String mp) {
 		ModelAndView mv = new ModelAndView();
 		Compte c = new Compte();
 		c.setLogin(login);
@@ -118,7 +121,7 @@ public class LoginController {
 	}
 	@GetMapping(value="/compte/{xyz}/{mp}")
 	public ModelAndView afficheCompte(@PathVariable String xyz,
-			   @PathVariable String mp) {
+									  @PathVariable String mp) {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("abc", loginService.getCompte(xyz));
 		mv.addObject("Comptes", loginService.getComptes());
