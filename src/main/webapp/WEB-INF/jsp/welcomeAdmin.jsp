@@ -9,19 +9,21 @@
     <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
           rel="stylesheet"/>
 </head>
-<body>
-Bienvenue ${identifiant}
+<body style="margin-right: 100px; margin-left: 15px">
+<h1>Bienvenue ${identifiant}</h1>
 <br />
-Vôtre rôle : ${role}
+<h3>Vôtre rôle : ${role}</h3>
 <br />
-Liste des privileges : <br/>
-<c:forEach var="row" items="${privileges}">
-Intitule : ${row.intitule}<br />
-</c:forEach>
-
-<button><a href="/reclamationsAdmin">Voir toutes les réclamations</a></button>
-<br />
-
-<button type="button"><a href="/roleattrib"> Attribuer un rôle à un compte </a></button>
+<h3>Liste des privileges : </h3><br/>
+<ul class="list-group">
+    <c:forEach var="row" items="${privileges}">
+        <li class="list-group-item" aria-current="true">Intitule : ${row.intitule}</li>
+    </c:forEach>
+</ul>
+<br/>
+<div class="btn-group">
+    <a href="/reclamationsAdmin" class="btn btn-primary active" aria-current="page">Voir toutes les réclamations</a>
+    <a href="/roleattrib" class="btn btn-primary">Attribuer un rôle à un compte</a>
+</div>
 </body>
 </html>
