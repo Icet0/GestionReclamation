@@ -5,25 +5,25 @@ import com.gestion.web.service.ReclamationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gestion.web.model.Compte;
 import com.gestion.web.model.Role;
 import com.gestion.web.service.LoginService;
 import com.gestion.web.service.RoleService;
+import org.springframework.web.util.WebUtils;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class LoginController {
-	
+	@Autowired
+	HttpServletResponse response;
 	@Autowired
 	LoginService loginService;
 
@@ -48,10 +48,18 @@ public class LoginController {
 	public String showLogin() {
 		return "login"; //il va appeler la page login.jsp !
 	}
+	public void setLoginCookie(HttpServletResponse response,String login) {
+		// create a cookie
+		Cookie cookie = new Cookie("login", login);
 
+		//add cookie to response
+		response.addCookie(cookie);
+
+	}
 	@PostMapping(value="/login")
 	public ModelAndView verifierLogin(@RequestParam String login,
-			                        @RequestParam String mp ) {
+			                        @RequestParam String mp,
+									  HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
 		if (loginService.verifierAuthentif(login, mp)) {
 			model.addObject("identifiant",login);
@@ -68,6 +76,12 @@ public class LoginController {
 
 				model.setViewName("welcomeAdmin");
 			}else{
+				setLoginCookie(response,login);
+				setRoleCookie(response,"user");
+				Cookie name = WebUtils.getCookie(request, "login");
+				if (name != null) {
+					model.addObject("identifiant",this.readLoginCookie(name.getValue()));
+				}
 				model.setViewName("welcomeUser");
 			}
 
@@ -137,4 +151,21 @@ public class LoginController {
 		}
 	}
 
+
+	public void setRoleCookie(HttpServletResponse response,String role) {
+		// create a cookie
+		Cookie cookie = new Cookie("role", role);
+
+		//add cookie to response
+		response.addCookie(cookie);
+
+	}
+
+	public String readLoginCookie(@CookieValue(value = "login", defaultValue = "Atta") String login) {
+		return  login;
+	}
+
+	public String readRoleCookie(@CookieValue(value = "role") String role) {
+		return  role;
+	}
 }

@@ -10,10 +10,9 @@
 <body>
 Bienvenue ${identifiant}
 <br />
-Vôtre rôle : ${role}
-<br />
-Liste des privileges :
-<c:forEach var="row" items="${privileges}"> ${row.intitule}<br />
-</c:forEach>
+<a  href="/reclamationsUser"
+        type="button">
+    Nouvelle réclamation
+</a>
 </body>
 </html>

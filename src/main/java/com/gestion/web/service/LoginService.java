@@ -33,7 +33,7 @@ public class LoginService {
 		return compteRepository.getTousLesComptes();
 	}
 	public Compte getCompte(String login) {
-		return compteRepository.getById(login);
+		return compteRepository.findByLogin(login);
 	}
 	public List<Compte> getComptes(String mp){
 		return compteRepository.getByMp(mp);
