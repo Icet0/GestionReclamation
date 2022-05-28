@@ -11,7 +11,10 @@
 <body>
 <c:forEach var="row" items="${Reclamations}">
     Titre : ${row["titre"]}<br />
-    Message : ${row.toString()}<br />
+    Message : ${row.message}<br />
+    Date : ${row.date}<br />
+    Compte ayant soumit la réclamation : ${row.compte} <br/>
+    État de la réclamation : ${row.valide}<br/><br/>
 
     <input type=submit value="valider" onclick=""/>
 <%--    TROUVERCOMMENT LANCER LA FONCTION ONCLICK DU JAVA --%>

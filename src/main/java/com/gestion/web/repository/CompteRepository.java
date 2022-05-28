@@ -16,7 +16,7 @@ import com.gestion.web.model.Compte;
 @Repository
 public interface CompteRepository extends JpaRepository<Compte, String>{
 	Compte findByLogin(String login);
-//....
+	//....
 	public List<Compte> getByMp(String mp);
 	//Requête SQL
 	//select * from compte;
