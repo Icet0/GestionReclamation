@@ -10,7 +10,8 @@
           rel="stylesheet">
 </head>
 <body>
-Bienvenue ${identifiant}
+<h1 class="display-3" style="margin-bottom: 10px;">Bienvenue ${identifiant}</h1>
+<h2 class="display-6" style="margin-bottom: 5px;">Liste de vos réclamations</h2>
 <table class="table">
     <thead>
     <tr>
@@ -30,7 +31,7 @@ Bienvenue ${identifiant}
     </tbody>
 </table>
 <a  href="/reclamationsUser"
-    type="button">
+    type="button"class="btn btn-primary btn-lg">
     Nouvelle réclamation
 </a>
 </body>

@@ -18,6 +18,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class ReclamationController {
@@ -60,6 +61,8 @@ public class ReclamationController {
             r.setTitre(titre);
             mv.addObject("identifiant",this.readLoginCookie(name.getValue()));
             reclamationService.creerReclamation(r);
+            List<Reclamation> recla = reclamationService.getReclamationCompte(name.getValue());
+            mv.addObject("reclamation", recla);
             mv.setViewName("welcomeUser");
         }
         return mv;
