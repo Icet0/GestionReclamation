@@ -25,6 +25,14 @@
     </div>
 
     <input class="btn btn-primary btn-lg" type=submit value="Envoyer" />
+    <c:if test="${reclaPb.length()>1}">
+    <div  class="mx-auto" style="width: 500px;" >
+        <div class="alert alert-danger fixed-bottom" role="alert"  >
+                ${reclaPb}
+        </div>
+    </div>
+    </c:if>
 </form>
+
 </body>
 </html>

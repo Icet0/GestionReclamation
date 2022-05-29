@@ -49,22 +49,32 @@ public class ReclamationController {
                                   @RequestParam String message,
                                   HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
-        Reclamation r = new Reclamation();
-        String login = "";
-        Cookie name = WebUtils.getCookie(request, "login");
-        if (name != null) {
-            Compte c = loginService.getCompte(name.getValue());
-            r.setCompte(c);
-            r.setDate(Date.from(Instant.now()));
-            r.setMessage(message);
-            r.setTitre(titre);
-            mv.addObject("identifiant",this.readLoginCookie(name.getValue()));
-            reclamationService.creerReclamation(r);
-            List<Reclamation> recla = reclamationService.getReclamationCompte(name.getValue());
-            mv.addObject("reclamation", recla);
-            mv.setViewName("welcomeUser");
+        if(titre==""){
+            mv.addObject("reclaPb","Veuillez saisir un titre");
+            mv.setViewName("reclamation");
         }
-        return mv;
+        else if(message==""){
+            mv.addObject("reclaPb","Veuillez renseigner un message");
+            mv.setViewName("reclamation");
+        }
+        else {
+            Reclamation r = new Reclamation();
+            String login = "";
+            Cookie name = WebUtils.getCookie(request, "login");
+            if (name != null) {
+                Compte c = loginService.getCompte(name.getValue());
+                r.setCompte(c);
+                r.setDate(Date.from(Instant.now()));
+                r.setMessage(message);
+                r.setTitre(titre);
+                mv.addObject("identifiant", this.readLoginCookie(name.getValue()));
+                reclamationService.creerReclamation(r);
+                List<Reclamation> recla = reclamationService.getReclamationCompte(name.getValue());
+                mv.addObject("reclamation", recla);
+                mv.setViewName("welcomeUser");
+            }
+        }
+            return mv;
     }
     public String readLoginCookie(@CookieValue(value = "login", defaultValue = "Atta") String login) {
         return  login;
