@@ -70,8 +70,9 @@ public class LoginController {
 			boolean flag = false;
 			for (Privilege p :this.loginService.getCompte(login).getRole().getPrivileges()){
 				lp.add(p);
-				if(p.getIntitule().equals("Administration"))flag = true;
+
 			}
+			if(this.loginService.getCompte(login).getRole().getId()==1)flag = true;
 			model.addObject("privileges",lp);
 			if(flag){
 
@@ -90,7 +91,7 @@ public class LoginController {
 
 			return model;
 		}else {
-			model.addObject("erreur","Mot de passse passe incorrect");
+			model.addObject("errorMessage","Mot de passse passe incorrect");
 			model.setViewName("login");
 			return model;
 		}
