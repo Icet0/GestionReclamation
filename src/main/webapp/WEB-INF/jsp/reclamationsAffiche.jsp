@@ -68,8 +68,8 @@
                     Titre : ${row["titre"]}<br />
                     Message : ${row.message}<br />
                     Date : ${row.date}<br />
-                    Compte ayant soumit la rÃ©clamation : ${row.compte} <br/>
-                    Ã‰tat de la rÃ©clamation : ${row.valide}<br/><br/>
+                    Compte ayant soumit la réclamation : ${row.compte} <br/>
+                    État de la réclamation : ${row.valide}<br/><br/>
 
 
 
