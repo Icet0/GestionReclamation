@@ -8,7 +8,7 @@ public class Reclamation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @Column(length = 60)
+    @Column(length = 360)
     private String message;
     private String titre;
     private Date date;

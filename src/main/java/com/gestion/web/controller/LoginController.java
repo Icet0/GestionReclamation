@@ -136,19 +136,19 @@ public class LoginController {
 		return "roleattrib"; //il va appeler la page login.jsp !
 	}
 	@PostMapping(value="/roleattrib")
-	public ModelAndView attribRole(Role r, String login, String mp){
+	public ModelAndView attribRole(Role r, String login){
 		ModelAndView m = new ModelAndView() ;
-		if (loginService.verifierAuthentif(login, mp)) {
+		if (loginService.getCompte(login) == null) {
+			m.addObject("erreur","Le compte que vous cherchez n'existe pas");
+			m.setViewName("compterole2");
+			return m;
+		}
+		else {
 			m.addObject("log", login);
 
 			roleService.affecteCompteARole(loginService.getCompte(login), r) ;
 			m.addObject("Role", loginService.getCompte(login).getRole().getIntitule()) ;
 			System.out.println(loginService.getCompte(login).getRole());
-			m.setViewName("compterole2");
-			return m;
-		}
-		else{
-			m.addObject("erreur","Le compte que vous cherchez n'existe pas");
 			m.setViewName("compterole2");
 			return m;
 		}

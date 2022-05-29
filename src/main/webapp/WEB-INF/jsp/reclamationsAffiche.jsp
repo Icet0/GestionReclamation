@@ -16,13 +16,14 @@
 <div class="list-group">
     <c:forEach var="row" items="${Reclamations}">
     <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+        Id : ${row.id}<br/>
         Titre : ${row["titre"]}<br />
         Message : ${row.message}<br />
         Date : ${row.date}<br />
         Compte ayant soumit la réclamation : ${row.compte} <br/>
         État de la réclamation : ${row.valide}<br/><br/>
 
-        <input type=submit value="valider" onclick=""/>
+        <input type=button value="valider" onclick="${row.id} = 'true'"/>
         <%--    TROUVERCOMMENT LANCER LA FONCTION ONCLICK DU JAVA --%>
         <br /><br />
     </a>
