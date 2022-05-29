@@ -18,6 +18,15 @@ public class Reclamation {
 
     private boolean valide;
 
+    private boolean traiter;
+
+    public boolean isTraiter() {
+        return traiter;
+    }
+
+    public void setTraiter(boolean traiter) {
+        this.traiter = traiter;
+    }
 
     public Reclamation(){super();}
 
