@@ -18,6 +18,7 @@
         <th scope="col">#</th>
         <th scope="col">Titre réclamation</th>
         <th scope="col">Date</th>
+        <th scope="col">Status</th>
     </tr>
     </thead>
     <tbody>
@@ -26,6 +27,20 @@
             <th scope="row">${row.id}</th>
             <td>${row.titre}</td>
             <td>${row.date}</td>
+            <td>
+                <c:if test="${row.traiter==true}">
+                    <c:if test="${row.valide==true}">
+                        Validé
+                    </c:if>
+                    <c:if test="${row.valide==false}">
+                        Refusé
+                    </c:if>
+                </c:if>
+                <c:if test="${row.traiter==false}">
+                    En traitement
+                </c:if>
+
+            </td>
         </tr>
     </c:forEach>
     </tbody>

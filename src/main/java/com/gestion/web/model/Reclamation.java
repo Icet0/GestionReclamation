@@ -5,8 +5,8 @@ import java.util.Date;
 
 @Entity //classe persistante liée à une table dans la base de données !
 public class Reclamation {
-    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
     private int id;
     @Column(length = 360)
     private String message;
@@ -18,6 +18,15 @@ public class Reclamation {
 
     private boolean valide;
 
+    private boolean traiter = false;
+
+    public boolean isTraiter() {
+        return traiter;
+    }
+
+    public void setTraiter(boolean traiter) {
+        this.traiter = traiter;
+    }
 
     public Reclamation(){super();}
 

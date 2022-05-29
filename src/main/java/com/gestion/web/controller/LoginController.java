@@ -75,13 +75,16 @@ public class LoginController {
 			if(this.loginService.getCompte(login).getRole().getId()==1)flag = true;
 			model.addObject("privileges",lp);
 			if(flag){
-
 				model.setViewName("welcomeAdmin");
+				setLoginCookie(response,login);
+				Cookie name = WebUtils.getCookie(request, "login");
+				if (name != null) {
+					model.addObject("identifiant",this.readLoginCookie(name.getValue()));
+				}
 			}else{
 				List<Reclamation> recla = reclamationService.getReclamationCompte(login);
 				model.addObject("reclamation", recla);
 				setLoginCookie(response,login);
-				setRoleCookie(response,"user");
 				Cookie name = WebUtils.getCookie(request, "login");
 				if (name != null) {
 					model.addObject("identifiant",this.readLoginCookie(name.getValue()));
