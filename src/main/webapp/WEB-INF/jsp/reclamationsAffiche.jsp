@@ -13,7 +13,7 @@
           rel="stylesheet"/>
 </head>
 <body style="margin-left: 15px; margin-right: 150px">
-<p class="text-left h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Liste des réclamations</p>
+<p class="text-left h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Liste des rÃ©clamations</p>
 <br/>
 <div class="list-group">
     <c:forEach var="row" items="${Reclamations}">
@@ -37,8 +37,8 @@
                     Titre : ${row["titre"]}<br />
                     Message : ${row.message}<br />
                     Date : ${row.date}<br />
-                    Compte ayant soumit la réclamation : ${row.compte} <br/>
-                    État de la réclamation : ${row.valide}<br/><br/>
+                    Compte ayant soumit la rÃ©clamation : ${row.compte} <br/>
+                    Ã‰tat de la rÃ©clamation : ${row.valide}<br/><br/>
 
 
 
@@ -57,7 +57,6 @@
                 </a>
             </div>
         </c:if>
-
 
 
     </c:forEach>

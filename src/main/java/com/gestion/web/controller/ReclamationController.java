@@ -5,7 +5,10 @@ import com.gestion.web.model.Reclamation;
 import com.gestion.web.service.LoginService;
 import com.gestion.web.service.ReclamationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
+
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
@@ -109,6 +112,5 @@ public class ReclamationController {
     public String readLoginCookie(@CookieValue(value = "login", defaultValue = "Atta") String login) {
         return  login;
     }
-
 
 }
