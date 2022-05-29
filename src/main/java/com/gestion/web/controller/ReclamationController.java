@@ -2,15 +2,11 @@ package com.gestion.web.controller;
 
 import com.gestion.web.model.Compte;
 import com.gestion.web.model.Reclamation;
-import com.gestion.web.model.Role;
 import com.gestion.web.service.LoginService;
 import com.gestion.web.service.ReclamationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
@@ -30,14 +26,42 @@ public class ReclamationController {
 
 //    MAPPING + appel fonction de reclamationService
 
+
     @GetMapping(value = "/reclamationsAdmin")
     public ModelAndView showReclamationsAdmin() {
+        System.out.println("In showReclamationsAdmin \n\n");
+
         ModelAndView mv = new ModelAndView();
         mv.addObject("Reclamations", reclamationService.getReclamations());
 //        mv.("onClickFunc", reclamationService.onClick());
         mv.setViewName("reclamationsAffiche");
         return mv;
     }
+
+
+    @PostMapping(value="/reclamationsAdmin", params="action=Accept")
+    public ModelAndView accepterValide(@RequestParam int id) {
+
+        System.out.println("In UPTDATE VALIDE \n\n"+id);
+        this.reclamationService.validerReclamation(id);
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("Reclamations", reclamationService.getReclamations());
+        mv.setViewName("reclamationsAffiche");
+        return mv;
+    }
+
+
+    @PostMapping(value="/reclamationsAdmin", params="action=Reject")
+    public ModelAndView refuserValide(@RequestParam int id) {
+
+        System.out.println("In UPTDATE VALIDE \n\n"+id);
+        this.reclamationService.refuserReclamation(id);
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("Reclamations", reclamationService.getReclamations());
+        mv.setViewName("reclamationsAffiche");
+        return mv;
+    }
+
     @GetMapping(value = "/reclamationsUser")
     public ModelAndView showReclamationsUser() {
         ModelAndView mv = new ModelAndView();
@@ -80,7 +104,6 @@ public class ReclamationController {
     public String readLoginCookie(@CookieValue(value = "login", defaultValue = "Atta") String login) {
         return  login;
     }
-    public void onClick(String id){
-        this.reclamationService.validerReclamation(id);
-    }
+
+
 }
