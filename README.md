@@ -8,3 +8,5 @@ Voici quelques informations nécessaires pour débuter :
   
   
 Une fois le projet lancé il faudra taper l'url "http://localhost:8080", pour arriver sur la page de garde. 
+
+Lien vers la video de presentation : https://youtu.be/I7tMSZEoH6w
