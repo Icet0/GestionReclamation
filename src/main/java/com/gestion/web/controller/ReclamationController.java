@@ -28,10 +28,16 @@ public class ReclamationController {
 
 
     @GetMapping(value = "/reclamationsAdmin")
-    public ModelAndView showReclamationsAdmin() {
+    public ModelAndView showReclamationsAdmin(HttpServletRequest request) {
         System.out.println("In showReclamationsAdmin \n\n");
-
+        Cookie name = WebUtils.getCookie(request, "login");
         ModelAndView mv = new ModelAndView();
+
+        Compte u = this.loginService.getCompte(name.getValue());
+        if(u.getRole().getId()!=1){
+            mv.setViewName("login");
+            return mv;
+        }
         mv.addObject("Reclamations", reclamationService.getReclamations());
 //        mv.("onClickFunc", reclamationService.onClick());
         mv.setViewName("reclamationsAffiche");
@@ -39,28 +45,27 @@ public class ReclamationController {
     }
 
 
-    @PostMapping(value="/reclamationsAdmin", params="action=Accept")
-    public ModelAndView accepterValide(@RequestParam int id) {
+    @PostMapping(value="/reclamationsAdmin")
+    public ModelAndView updateValide(@RequestParam int id,@RequestParam String type) {
+        if(type.equals("valider")){
+            System.out.println("In UPTDATE VALIDE \n\n"+id);
+            this.reclamationService.validerReclamation(id);
+            ModelAndView mv = new ModelAndView();
+            mv.addObject("Reclamations", reclamationService.getReclamations());
+            mv.setViewName("reclamationsAffiche");
+            return mv;
+        } else {
+            System.out.println("In UPTDATE VALIDE \n\n"+id);
+            this.reclamationService.refuserReclamation(id);
+            ModelAndView mv = new ModelAndView();
+            mv.addObject("Reclamations", reclamationService.getReclamations());
+            mv.setViewName("reclamationsAffiche");
+            return mv;
 
-        System.out.println("In UPTDATE VALIDE \n\n"+id);
-        this.reclamationService.validerReclamation(id);
-        ModelAndView mv = new ModelAndView();
-        mv.addObject("Reclamations", reclamationService.getReclamations());
-        mv.setViewName("reclamationsAffiche");
-        return mv;
+        }
     }
 
 
-    @PostMapping(value="/reclamationsAdmin", params="action=Reject")
-    public ModelAndView refuserValide(@RequestParam int id) {
-
-        System.out.println("In UPTDATE VALIDE \n\n"+id);
-        this.reclamationService.refuserReclamation(id);
-        ModelAndView mv = new ModelAndView();
-        mv.addObject("Reclamations", reclamationService.getReclamations());
-        mv.setViewName("reclamationsAffiche");
-        return mv;
-    }
 
     @GetMapping(value = "/reclamationsUser")
     public ModelAndView showReclamationsUser() {

@@ -47,8 +47,8 @@
                         <div  class="mx-auto" style="width: 500px;" >
                             <input type=hidden class="form-control" id="exampleFormControlInput1" name=id value="${row.id}">
                         </div>
-                        <input class="btn btn-primary btn-lg" type=submit value="Valider" />
-                        <input class="btn btn-primary btn-lg" type=submit value="Refuser" />
+                        <input class="btn btn-primary btn-lg" type=submit value="valider" name = "type"/>
+                        <input class="btn btn-primary btn-lg" type=submit value="refuser" name = "type"/>
 
                         <br /><br />
                     </form>
